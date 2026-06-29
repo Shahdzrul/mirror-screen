@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Screen Mirror</title>
+
+  <style>
+    body{
+      margin:0;
+      background:#111;
+      color:white;
+      font-family:sans-serif;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      flex-direction:column;
+    }
+
+    video{
+      width:90%;
+      max-width:900px;
+      border-radius:12px;
+      background:black;
+    }
+
+    button{
+      margin-top:20px;
+      padding:12px 20px;
+      border:none;
+      border-radius:10px;
+      cursor:pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Screen Mirror</h1>
+
+<video id="screen" autoplay playsinline></video>
+
+<button onclick="shareScreen()">
+  Start Screen Share
+</button>
+
+<script>
+async function shareScreen(){
+  try{
+    const stream =
+      await navigator.mediaDevices.getDisplayMedia({
+        video:true
+      });
+
+    document
+      .getElementById("screen")
+      .srcObject = stream;
+
+  }catch(err){
+    alert("Screen share dibatalkan");
+  }
+}
+</script>
+
+</body>
+</html>
